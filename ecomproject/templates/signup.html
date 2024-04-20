@@ -18,8 +18,9 @@ Shopping Cart | Signup
         <div class="col-md-4">
 
 <div class="card">
+    {% include "messages.html" %}
     <div class="card-body">
-        <form action="" method="post">
+        <form action="/signup" method="post">
 
             <div class="form-group mt-2">
                 <label for="fname">First Name</label>

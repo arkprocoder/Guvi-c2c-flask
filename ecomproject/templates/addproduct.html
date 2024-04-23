@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}
+Shopping Cart | Add Product
+{% endblock title %}
+{% block body %}
+
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Add Product</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">     
+        </div>
+
+        <div class="col-md-4">
+
+            {% include "messages.html" %}
+<div class="card">
+    <div class="card-body">
+        <form action="/addproduct" method="post" enctype="multipart/form-data">
+
+           
+            <div class="form-group mt-2">
+                <label for="email">Product Owner Email</label>
+                <input type="email" class="form-control p-2" name="email" id="email" value="{{current_user.email}}" readOnly="True" required>
+            </div>
+           
+            <div class="form-group mt-2">
+                <label for="pname">Product Name</label>
+                <input type="text" class="form-control p-2" name="pname" id="pname" required>
+            </div>
+            
+            <div class="form-group mt-2">
+                <label for="pprice">Product Price</label>
+                <input type="number" class="form-control p-2" name="pprice" id="pprice" required>
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="pcategory">Product Category</label>
+                <input type="text" class="form-control p-2" name="pcategory" id="pcategory" required>
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="pdesc">Product Description</label>
+             <textarea class="form-control p-3" name="pdes" id="pdes" cols="5" rows="5"></textarea>
+            </div>
+            
+            <div class="form-group mt-2">
+                <label for="pcount">Product Stock Count</label>
+                <input type="number" class="form-control p-2" name="pcount" id="pcount" required>
+            </div>
+          
+            <div class="form-group mt-2">
+                <label for="pimage">Upload Product Image</label>
+                <input type="file" class="form-control p-2" name="pimage" id="pimage" required>
+            </div>
+          
+           
+
+            <div class="d-grid gap-2 mt-3">
+                <button class="btn btn-success" type="submit">Submit</button>
+               
+              </div>
+
+        </form>
+        <br>
+
+        
+</div>
+
+
+
+
+        </div>
+
+
+
+        <div class="col-md-4"></div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </section>
+
+{% endblock body %}

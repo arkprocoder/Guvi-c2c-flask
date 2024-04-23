@@ -4,6 +4,9 @@ from flask_login import login_user,login_manager,UserMixin,LoginManager,login_re
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask import flash,redirect,url_for
 from flask_login import current_user
+from datetime import datetime
+import os
+from werkzeug.utils import secure_filename
 
 
 local_server=True
@@ -14,6 +17,12 @@ app.secret_key="bhkghehedbhdv%$@%@&^#&(5455)"
 
 login_manager=LoginManager(app)
 login_manager.login_view='login'
+
+# configuration for handling images which is uploaded in database
+app.config['UPLOAD_FOLDER']='static/uploads/'
+app.config['ALLOWED_EXTENSIONS']={'png','jpg','jpeg','gif'}
+app.config['MAX_CONTENT_LENGTH']= 16*1024*1024 #16mb
+
 
 
 # dbconnections
@@ -39,10 +48,23 @@ class Signup(UserMixin,db.Model):
     lastname=db.Column(db.String(50))
     email=db.Column(db.String(80))
     password=db.Column(db.String(1000))
-    phone=db.Column(db.Integer)
+    phone=db.Column(db.String(12))
 
     def get_id(self):
         return self.userid
+
+
+
+class Products(db.Model):
+    pid=db.Column(db.Integer,primary_key=True)
+    email=db.Column(db.String(50))
+    productname=db.Column(db.String(100))
+    price=db.Column(db.String(100))
+    category=db.Column(db.String(100))
+    description=db.Column(db.String(1000))
+    stock=db.Column(db.String(100))
+    pimage=db.Column(db.String(1000))
+    timestamp=db.Column(db.String(1000))
 
 @app.route("/") #http://127.0.0.1:5000/
 def home():
@@ -128,5 +150,35 @@ def logout():
     logout_user()
     flash("Logout Success","primary")
     return redirect(url_for('login'))
+
+
+
+
+@app.route('/addproduct',methods=['GET','POST'])
+@login_required
+def addproduct():
+    if request.method=="POST":
+        email=request.form['email']
+        pname=request.form['pname']
+        pprice=request.form['pprice']
+        pcategory=request.form['pcategory']
+        pdesc=request.form['pdes']
+        pstock=request.form['pcount']
+        pimage=request.files['pimage']
+        date=datetime.now()
+        if pimage:
+            filename=secure_filename(pimage.filename)
+            pimage.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            query=Products(email=email,productname=pname,price=pprice,category=pcategory,description=pdesc,stock=pstock,pimage=pimage.filename,timestamp=date)
+            db.session.add(query)
+            db.session.commit()
+            flash("Product is uploaded","success")
+            return redirect(url_for('addproduct'))
+
+    return render_template("addproduct.html")
+
+
+
+
 
 app.run(debug=True)

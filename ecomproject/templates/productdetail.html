@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}
+Shopping Cart | Login
+{% endblock title %}
+{% block body %}
+
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Product Detail</h2>
+    </div>
+
+    <a href="/" class="btn btn-dark">Go Back</a>
+    <div class="row mt-2">
+
+        <div class="col-md-6">
+            <div class="card">
+            
+                <img src="{{url_for('static',filename='uploads/'+product.pimage)}}" class="card-img-top">
+               
+              </div>
+        </div>
+        <div class="col-md-4">
+
+            <div class="card p-2">
+                <div class="card-body">
+
+                    <div class="card-body">
+                        <h3 class="card-title">{{product.productname}}</h3>
+                        <hr>
+                        <p class="card-text">{{product.description}}</p>
+                        <hr>
+                        <p class="card-text"><b>Price : {{product.price}}</b></p>
+                        <p class="card-text"><b>Category : {{product.category}}</b></p>
+                        <p class="card-text"><b>Stock Count : {{product.stock}}</b></p>
+                        <hr>
+                        <a href="#" class="btn btn-success">Add to cart</a>
+                      </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+       
+    </div>
+
+  </div>
+
+  </section>
+
+{% endblock body %}

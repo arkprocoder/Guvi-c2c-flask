@@ -12,6 +12,29 @@ Shopping Cart | Home
     </div>
 
 
+    <div class="row">
+      {% for product in products %}
+    
+     
+      <div class="col-md-3">
+        <div class="card">
+          <img src="{{url_for('static',filename='uploads/'+product.pimage)}}" class="card-img-top"  height="300px">
+          <div class="card-body">
+            <h5 class="card-title">{{product.productname}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            <p class="card-text"><b>Price : {{product.price}}</b></p>
+            <a href="#" class="btn btn-success">Add to cart</a>
+            <a href="/product/{{product.pid}}" class="btn btn-dark">View</a>
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+
+  
+
 
   </div>
 

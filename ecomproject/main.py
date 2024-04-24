@@ -68,7 +68,8 @@ class Products(db.Model):
 
 @app.route("/") #http://127.0.0.1:5000/
 def home():
-    return render_template("index.html")
+    products=Products.query.all()
+    return render_template("index.html",products=products)
 
 @app.route("/login",methods=['GET','POST']) 
 def login():
@@ -178,7 +179,9 @@ def addproduct():
     return render_template("addproduct.html")
 
 
-
-
+@app.route('/product/<int:id>', methods=['GET','POST'])
+def productdetails(id):
+    product=Products.query.filter_by(pid=id).first()
+    return render_template('productdetail.html',product=product)
 
 app.run(debug=True)

@@ -184,4 +184,9 @@ def productdetails(id):
     product=Products.query.filter_by(pid=id).first()
     return render_template('productdetail.html',product=product)
 
+
+@app.route('/cart', methods=['GET','POST'])
+def cartItems():
+    return render_template('cart.html')
+
 app.run(debug=True)

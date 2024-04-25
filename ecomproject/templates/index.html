@@ -23,7 +23,7 @@ Shopping Cart | Home
             <h5 class="card-title">{{product.productname}}</h5>
             <p class="card-text">{{product.description}}</p>
             <p class="card-text"><b>Price : {{product.price}}</b></p>
-            <a href="#" class="btn btn-success">Add to cart</a>
+            <button onclick="addToCart('{{ product.pid }}', '{{ product.productname }}', '{{ product.price }}', this)" class="btn btn-success">Add to cart</button>
             <a href="/product/{{product.pid}}" class="btn btn-dark">View</a>
           </div>
         </div>

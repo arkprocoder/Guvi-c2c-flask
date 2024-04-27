@@ -66,6 +66,19 @@ class Products(db.Model):
     pimage=db.Column(db.String(1000))
     timestamp=db.Column(db.String(1000))
 
+
+class Orders(db.Model):
+    oid=db.Column(db.Integer,primary_key=True)
+    products=db.Column(db.String(1000))
+    price=db.Column(db.String(100))
+    email=db.Column(db.String(50))
+    address=db.Column(db.String(1000))
+    pincode=db.Column(db.String(100))
+    deliveryStatus=db.Column(db.String(100))
+    timeStamp=db.Column(db.String(1000))
+
+
+
 @app.route("/") #http://127.0.0.1:5000/
 def home():
     products=Products.query.all()
@@ -188,5 +201,24 @@ def productdetails(id):
 @app.route('/cart', methods=['GET','POST'])
 def cartItems():
     return render_template('cart.html')
+
+
+@app.route('/checkout', methods=['GET','POST'])
+def checkout():
+    if request.method=="POST":
+        email=request.form.get("email")
+        address=request.form.get("address")
+        pin=request.form.get("pin")
+        products=request.form.get("products")
+        amount=request.form.get("amount")
+        deliverystats="Not Delivered"
+        timestamp=datetime.now()
+        query=Orders(products=products,price=amount,email=email,address=address,pincode=pin,deliveryStatus=deliverystats,timeStamp=timestamp)
+        db.session.add(query)
+        db.session.commit()
+        flash("Order is Success","success")
+        return redirect(url_for('profile'))
+
+    return render_template('checkout.html')
 
 app.run(debug=True)

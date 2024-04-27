@@ -1,281 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{% block title %}{% endblock title %}</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
-  <title>
+    <!-- Favicons -->
+    <link href="/static/assets/img/favicon.png" rel="icon" />
+    <link
+      href="/static/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+    />
 
-{% block title %}{% endblock title %}
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
 
-  </title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <!-- Vendor CSS Files -->
+    <link href="/static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="/static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/assets/vendor/remixicon/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- Favicons -->
-  <link href="/static/assets/img/favicon.png" rel="icon">
-  <link href="/static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Template Main CSS File -->
+    <link href="/static/assets/css/style.css" rel="stylesheet" />
+  </head>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="/">Shopping Cart</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="/static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-  <!-- Vendor CSS Files -->
-  <link href="/static/assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="/static/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="/static/assets/css/style.css" rel="stylesheet">
-
-
-</head>
-
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center">
-
-      <h1 class="logo me-auto"><a href="/">Shopping  Cart</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="/static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="/">Home</a></li>
-          <li><a class="nav-link scrollto" href="/cart">Cart</a></li>
-          <li><a class="nav-link   scrollto" href="/orders">Orders</a></li>
-
-         
-         
-          {% if current_user.is_authenticated %}
-          <li class="dropdown"><a href="/"><span> Welcome {{current_user.firstname}} </span> <i class="bi bi-chevron-down"></i></a>
-            <ul>            
-              <li><a href="/logout">Logout</a></li>             
-            </ul>
-          </li>
-
-          {% else %}
-          <li class="dropdown"><a href="/login"><span> SignIn</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-             
-              <li><a href="/login">Login</a></li>
-              <li><a href="/signup">Signup</a></li>
-  
-            </ul>
-          </li>
-
-          {% endif %}
-          <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
-
-          <li><a class="nav-link scrollto" href="/addproduct">Add Products  </a></li>
-
-          
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="/">Home</a></li>
+            <li><a class="nav-link scrollto" href="/cart">Cart</a></li>
 
 
+            {% if current_user.is_authenticated %}
+            <li class="dropdown">
+              <a href="/"
+                ><span> Welcome {{current_user.firstname}} </span>
+                <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li><a href="/logout">Logout</a></li>
+              </ul>
+            </li>
 
-          <li><a class="getstarted scrollto" href="/profile">My Profile</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+            {% else %}
+            <li class="dropdown">
+              <a href="/login"
+                ><span> SignIn</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Signup</a></li>
+              </ul>
+            </li>
 
-    </div>
-  </header><!-- End Header -->
+            {% endif %}
+            <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+            <li>
+              <a class="nav-link scrollto" href="/addproduct">Add Products </a>
+            </li>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-          <h1>Better Solutions For Your Business</h1>
-          <h2>We are team of talented designers making websites with Bootstrap</h2>
-          <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
-          </div>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-          <img src="/static/assets/img/hero-img.png" class="img-fluid animated" alt="">
-        </div>
+            <li>
+              <a class="getstarted scrollto" href="/profile">My Profile</a>
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
       </div>
-    </div>
+    </header>
+    <!-- End Header -->
 
-  </section><!-- End Hero -->
-
-  <main id="main">
-
-
-
-    {% block body %}{% endblock body %}
-
-
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-
-
-    <div class="footer-top">
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
       <div class="container">
         <div class="row">
-
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Shopping  Cart</h3>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Social Networks</h4>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
-            <div class="social-links mt-3">
-              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          <div
+            class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <h1>Better Solutions For Your Business</h1>
+            <h2>
+              We are team of talented designers making websites with Bootstrap
+            </h2>
+            <div class="d-flex justify-content-center justify-content-lg-start">
+              <a href="#about" class="btn-get-started scrollto">Get Started</a>
+              <a
+                href="https://www.youtube.com/watch?v=jDDaplaOz7Q"
+                class="glightbox btn-watch-video"
+                ><i class="bi bi-play-circle"></i><span>Watch Video</span></a
+              >
             </div>
           </div>
-
+          <div
+            class="col-lg-6 order-1 order-lg-2 hero-img"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <img
+              src="/static/assets/img/hero-img.png"
+              class="img-fluid animated"
+              alt=""
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+    <!-- End Hero -->
 
-    <div class="container footer-bottom clearfix">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Shopping  Cart</span></strong>. All Rights Reserved
+    <main id="main">{% block body %}{% endblock body %}</main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 footer-contact">
+              <h3>Shopping Cart</h3>
+              <p>
+                A108 Adam Street <br />
+                New York, NY 535022<br />
+                United States <br /><br />
+                <strong>Phone:</strong> +1 5589 55488 55<br />
+                <strong>Email:</strong> info@example.com<br />
+              </p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">About us</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Terms of service</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Privacy policy</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4>Our Services</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Web Design</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Web Development</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Product Management</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Marketing</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#">Graphic Design</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4>Our Social Networks</h4>
+              <p>
+                Cras fermentum odio eu feugiat lide par naso tierra videa magna
+                derita valies
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"
+                  ><i class="bx bxl-instagram"></i
+                ></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/Shopping  Cart-free-bootstrap-html-template-corporate/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
+      <div class="container footer-bottom clearfix">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Shopping Cart</span></strong
+          >. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/Shopping  Cart-free-bootstrap-html-template-corporate/ -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
       </div>
-    </div>
-  </footer><!-- End Footer -->
+    </footer>
+    <!-- End Footer -->
 
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
 
-  <!-- Vendor JS Files -->
-  <script src="/static/assets/vendor/aos/aos.js"></script>
-  <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/static/assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="/static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="/static/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="/static/assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="/static/assets/vendor/php-email-form/validate.js"></script>
+    <!-- Vendor JS Files -->
+    <script src="/static/assets/vendor/aos/aos.js"></script>
+    <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/static/assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="/static/assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="/static/assets/js/main.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/static/assets/js/main.js"></script>
 
+    <script>
+      function addToCart(pid, productName, price, button) {
+        // Change button text to "Added"
+        button.textContent = "Added";
 
-  <script>
-    function addToCart(pid, productName, price, button) {
-      // Change button text to "Added"
-      button.textContent = "Added";
-  
-      // Disable the button
-      button.disabled = true;
-  
-      // Change button color to red (using Bootstrap class)
-      button.classList.remove("btn-success");
-      button.classList.add("btn-danger");
-  
-      // Store product details in local storage
-      var cartItem = {
-        pid: pid,
-        productname: productName,
-        price: price
-      };
-  
-      // Retrieve existing cart items from local storage
-      var cart = JSON.parse(localStorage.getItem("cart")) || [];
-  
-      // Add the new item to the cart
-      cart.push(cartItem);
-  
-      // Store updated cart in local storage
-      localStorage.setItem("cart", JSON.stringify(cart));
+        // Disable the button
+        button.disabled = true;
 
-      updateCartTable();
+        // Change button color to red (using Bootstrap class)
+        button.classList.remove("btn-success");
+        button.classList.add("btn-danger");
 
+        // Store product details in local storage
+        var cartItem = {
+          pid: pid,
+          productname: productName,
+          price: price,
+        };
 
-    }
+        // Retrieve existing cart items from local storage
+        var cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+        // Add the new item to the cart
+        cart.push(cartItem);
 
-    function updateCartTable() {
-      var cart = JSON.parse(localStorage.getItem("cart")) || [];
-      var tableContent = "<h2>Shopping Cart</h2><table class='table'><thead><tr><th>Product Name</th><th>Price</th><th>Action</th></tr></thead><tbody>";
-  
-      // Populate table rows with cart items
-      cart.forEach(function(item) {
-        tableContent += "<tr><td>" + item.productname + "</td><td>" + item.price + "</td><td><button onclick='deleteCartItem(" + JSON.stringify(item) + ")' class='btn btn-danger'>Delete</button></td></tr>";
-      });
-  
-      tableContent += "</tbody></table>";
-  
-      // Update the cart table
-      document.getElementById("cartTable").innerHTML = tableContent;
-    }
-  
-    function deleteCartItem(item) {
-      var cart = JSON.parse(localStorage.getItem("cart")) || [];
-  
-      // Find index of the item in the cart
-      var index = cart.findIndex(function(cartItem) {
-        return cartItem.pid === item.pid;
-      });
-  
-      // Remove the item from the cart
-      if (index !== -1) {
-        cart.splice(index, 1);
-        // Update local storage
+        // Store updated cart in local storage
         localStorage.setItem("cart", JSON.stringify(cart));
-        // Update the cart table
+
+        checkout();
         updateCartTable();
       }
-    }
-  
-    // Load cart table on page load
-    window.onload = updateCartTable;
-  </script>
 
-</body>
 
+      function updateCartTable() {
+        var cart = JSON.parse(localStorage.getItem("cart")) || [];
+        var tableContent =
+          "<h2>Shopping Cart</h2><table class='table'><thead><tr><th>Product Name</th><th>Price</th><th>Action</th></tr></thead><tbody>";
+
+        // Populate table rows with cart items
+        cart.forEach(function (item) {
+          tableContent +=
+            "<tr><td>" +
+            item.productname +
+            "</td><td>" +
+            item.price +
+            "</td><td><button onclick='deleteCartItem(" +
+            JSON.stringify(item) +
+            ")' class='btn btn-danger'>Delete</button></td></tr>";
+        });
+
+        tableContent += "</tbody></table>";
+
+        // Update the cart table
+        document.getElementById("cartTable").innerHTML = tableContent;
+      }
+
+      function deleteCartItem(item) {
+        var cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Find index of the item in the cart
+        var index = cart.findIndex(function (cartItem) {
+          return cartItem.pid === item.pid;
+        });
+
+        // Remove the item from the cart
+        if (index !== -1) {
+          cart.splice(index, 1);
+          // Update local storage
+          localStorage.setItem("cart", JSON.stringify(cart));
+          // Update the cart table
+          checkout();
+          updateCartTable();
+        }
+      }
+
+      // Load cart table on page load
+      window.onload = updateCartTable;
+    </script>
+
+    {% block script %}{% endblock script %}
+  </body>
 </html>

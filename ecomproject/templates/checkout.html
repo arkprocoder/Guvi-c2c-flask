@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %}
+Shopping Cart | Checkout
+{% endblock title %}
+{% block body %}
+
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Checkout </h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">   
+            
+            <div id="cartTable"></div>
+        </div>
+
+        <div class="col-md-4">
+
+<div class="card">
+  {% include "messages.html" %}
+    <div class="card-body">
+
+        <form action="/checkout" method="post">
+
+           
+            <div class="form-group mt-2">
+                
+                <input type="hidden" class="form-control p-2" name="email" id="email" value="{{current_user.email}}" required>
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="address">Address</label>
+                <textarea class="form-control p-3" name="address" id="address" cols="5" rows="5"></textarea>
+            </div>
+            
+
+            <div class="form-group mt-2">
+                <label for="pin">Pin Code</label>
+                <input type="number" class="form-control p-2" name="pin" id="pin" required>
+            </div>
+          
+
+            <input type="hidden" class="form-control p-2" name="products" id="products" required>
+
+            <input type="hidden" class="form-control p-2" name="amount" id="amount" required>
+           
+
+            <div class="d-grid gap-2 mt-3">
+                <button class="btn btn-success" type="submit">Order</button>
+               
+              </div>
+
+        </form>
+       
+    </div>
+</div>
+
+
+
+
+        </div>
+
+
+
+        <div class="col-md-4"></div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </section>
+
+{% endblock body %}
+
+
+{% block script %}
+
+
+<script>
+
+function checkout() {
+    var cartData = localStorage.getItem("cart");
+
+    // Parse the JSON string to get the array of cart items
+    var cartItems = JSON.parse(cartData);
+
+    // Initialize variables for table HTML and total price
+    var tableHTML = '<table class="table"><thead><tr><th>Product Name</th><th>Price</th></tr></thead><tbody>';
+    var totalPrice = 0;
+
+    // Iterate over each cart item to generate table rows and calculate total price
+    cartItems.forEach(function(item) {
+      // Add a row for each product with its name and price
+      tableHTML += '<tr><td>' + item.productname + '</td><td>' + item.price + '</td></tr>';
+
+      // Convert price to a number and add it to the totalPrice
+      totalPrice += parseFloat(item.price);
+    });
+
+    // Close the table body and add a row for the total price
+    tableHTML += '</tbody></table>';
+    tableHTML += '<div class="total-price">Total Price: Rs' + totalPrice.toFixed(2) + '</div>';
+
+    // Display the table and total price in the designated HTML element
+    document.getElementById("cartTable").innerHTML = tableHTML;
+
+     // Initialize variables for products array and total price
+  var productsArray = [];
+  var totalPrice = 0;
+
+  // Iterate over each cart item to add product names to the products array and calculate total price
+  cartItems.forEach(function(item) {
+    productsArray.push(item.productname);
+    totalPrice += parseFloat(item.price);
+  });
+
+    document.getElementById("products").value = JSON.stringify(productsArray);
+   document.getElementById("amount").value = totalPrice.toFixed(2);
+}
+
+
+
+window.onload = checkout;
+
+</script>
+
+{% endblock script %}

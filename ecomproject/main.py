@@ -154,7 +154,8 @@ def test():
 @login_required
 def profile():
     userdata=Signup.query.filter_by(email=current_user.email).first()
-    return render_template("profile.html",userdata=userdata)
+    userOrders=Orders.query.filter_by(email=current_user.email).all()
+    return render_template("profile.html",userdata=userdata,userOrders=userOrders)
 
 
 
@@ -220,5 +221,15 @@ def checkout():
         return redirect(url_for('profile'))
 
     return render_template('checkout.html')
+
+
+@app.route('/orderdelete/<int:id>', methods=['GET','POST'])
+def orderdelete(id):
+    query=f"Delete from `orders` where `orders`.`oid`={id}"
+    with db.engine.begin() as conn:    
+            conn.exec_driver_sql(query)
+            flash("Order is Cancelled..","success")  
+    return redirect(url_for('profile'))
+
 
 app.run(debug=True)

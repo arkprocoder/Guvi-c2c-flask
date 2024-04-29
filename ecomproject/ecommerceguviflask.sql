@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2024 at 05:25 PM
+-- Generation Time: Apr 29, 2024 at 05:05 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `ecommerceguvi`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `oid` int(11) NOT NULL,
+  `products` varchar(1000) NOT NULL,
+  `price` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `address` varchar(1000) NOT NULL,
+  `pincode` varchar(100) NOT NULL,
+  `deliveryStatus` varchar(100) NOT NULL,
+  `timeStamp` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`oid`, `products`, `price`, `email`, `address`, `pincode`, `deliveryStatus`, `timeStamp`) VALUES
+(1, '[\"Camera\",\"camera dslr\",\"Earbuds\"]', '61500.00', 'ark@gmail.com', 'Bangalore', '560032', 'Not Delivered', '2024-04-27 19:56:02.271147');
 
 -- --------------------------------------------------------
 
@@ -97,6 +121,12 @@ INSERT INTO `test` (`id`, `name`) VALUES
 --
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`oid`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -117,6 +147,12 @@ ALTER TABLE `test`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `oid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
